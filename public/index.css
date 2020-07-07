@@ -30,3 +30,7 @@
 .card-action.actions {
     display: block;
 }
+
+.card-img{
+    max-width: 70px;
+}
