@@ -24,9 +24,23 @@ router.get('/:id/edit', async (req, res) => {
     })
 })
 
-router.post('/edit', async (req, res) => {
-    await Course.findOneAndUpdate(req.body.id, req.body)
+router.post('/edit', async (req, res) => {    
+    await Course.updateOne({_id: req.body._id}, {
+        title: req.body.title,
+        img: req.body.img,
+        price: req.body.price
+    })
     res.redirect('/courses')
+})
+
+router.post('/remove', async (req, res) => {
+    try {
+        await Course.deleteOne({_id: req.body.id})
+        res.redirect('/courses')
+    } catch (e) {
+        console.log(e);
+    }
+
 })
 
 router.get('/:id', async (req, res) => {
