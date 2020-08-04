@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const Handlebars = require('handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
@@ -9,6 +10,7 @@ const cardRoutes = require('./routes/card')
 const addRoutes = require('./routes/add')
 const coursesRoutes = require('./routes/courses')
 const ordersRoutes = require('./routes/orders')
+const authRoutes = require('./routes/auth')
 const User = require('./models/user')
 
 const app = express()
@@ -41,13 +43,14 @@ app.use('/add', addRoutes)
 app.use('/courses', coursesRoutes)
 app.use('/card', cardRoutes)
 app.use('/orders', ordersRoutes)
+app.use('/auth', authRoutes)
 
 const PORT = process.env.PORT || 3000
 
 
 async function start () {
     try {
-        const url = `mongodb+srv://Filya:Q1w2e3r4@cluster0.pabpm.mongodb.net/MarketHbs`
+        const url = process.env.URL
         await mongoose.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
