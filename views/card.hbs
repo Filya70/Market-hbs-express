@@ -19,7 +19,7 @@
                     <td><img class="card-img" src="{{img}}" alt=""> {{title}}</td>
                     <td>{{count}}</td>
                     <td>
-                        <button class="btn btn-small js-remove" data-id="{{id}}">Удалить</button>
+                        <button class="btn btm-small js-remove" data-id="{{id}}" data-csrf="{{@root.csrf}}">Удалить</button>
                     </td>
                 </tr>
                 {{/each}}
@@ -28,6 +28,7 @@
         <p><strong>Цена: </strong><span class="price">{{price}}</span></p>
 
         <form action="/orders" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
             <button type="submit" class="btn">Сделать заказ</button>
         </form>
     {{else}}

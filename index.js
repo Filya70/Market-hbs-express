@@ -16,6 +16,7 @@ const authRoutes = require('./routes/auth')
 const User = require('./models/user')
 const varMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
+const csrf = require('csurf')
 
 const app = express()
 
@@ -44,6 +45,7 @@ app.use(session({
     store
 }))
 
+app.use(csrf())
 app.use(varMiddleware)
 app.use(userMiddleware)
 
